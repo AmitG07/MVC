@@ -1,0 +1,67 @@
+﻿@model IEnumerable<EventManagement.Models.EventModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Upcoming Events</h2>
+
+<table class="table">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        var originalDate = new DateTime(item.Date.Year, item.Date.Month, item.Date.Day, item.StartTime.TimeOfDay.Hours, item.StartTime.TimeOfDay.Minutes, item.StartTime.TimeOfDay.Seconds);
+        if (originalDate > DateTime.Now)
+        {
+
+            <tr>
+
+
+                <td>
+                    @{string b = item.Title;}
+                    @Html.ActionLink(b, "Details", new { id = item.EventID })
+                </td>
+            </tr>
+        }
+    }
+
+</table>
+
+
+
+<h2>Past Events</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        var originalDate = new DateTime(item.Date.Year, item.Date.Month, item.Date.Day, item.StartTime.TimeOfDay.Hours, item.StartTime.TimeOfDay.Minutes, item.StartTime.TimeOfDay.Seconds);
+        if (originalDate < DateTime.Now)
+        {
+            <tr>
+
+
+                <td>
+                    @{string s = item.Title;}
+                    @Html.ActionLink(s, "Details", new { id = item.EventID })
+                </td>
+            </tr>
+        }
+    }
+
+</table>
+
+<h3>
+    @Html.ActionLink("Customer Support", "GoToUrl")
+</h3>

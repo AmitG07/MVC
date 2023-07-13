@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BREMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="EVENTTBL">
+    <Key>
+      <PropertyRef Name="EventId" />
+    </Key>
+    <Property Name="EventId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Date" Type="date" Nullable="false" />
+    <Property Name="Location" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="StartTime" Type="time" Precision="0" Nullable="false" />
+    <Property Name="Type" Type="varchar" MaxLength="255" />
+    <Property Name="Duration" Type="int" />
+    <Property Name="Description" Type="varchar" MaxLength="50" />
+    <Property Name="OtherDetails" Type="varchar" MaxLength="500" />
+    <Property Name="InviteByEmail" Type="varchar" MaxLength="50" />
+    <Property Name="Count" Type="int" />
+    <Property Name="CommentAdded" Type="varchar" MaxLength="50" />
+    <Property Name="UserID" Type="int" />
+  </EntityType>
+  <EntityType Name="USERTBL">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="100" />
+    <Property Name="Email" Type="varchar" MaxLength="100" />
+    <Property Name="Passcode" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <Association Name="FK__EVENTTBL__UserID__3A81B327">
+    <End Role="USERTBL" Type="Self.USERTBL" Multiplicity="0..1" />
+    <End Role="EVENTTBL" Type="Self.EVENTTBL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USERTBL">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="EVENTTBL">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BREMModelStoreContainer">
+    <EntitySet Name="EVENTTBL" EntityType="Self.EVENTTBL" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="USERTBL" EntityType="Self.USERTBL" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__EVENTTBL__UserID__3A81B327" Association="Self.FK__EVENTTBL__UserID__3A81B327">
+      <End Role="USERTBL" EntitySet="USERTBL" />
+      <End Role="EVENTTBL" EntitySet="EVENTTBL" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

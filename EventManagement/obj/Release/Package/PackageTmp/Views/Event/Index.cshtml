@@ -1,0 +1,39 @@
+﻿@model IEnumerable<EventManagement.Models.EventModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>My Events</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+       
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+       
+
+            <tr>
+            
+
+                <td>
+                    @{string b = item.Title;}
+                    @Html.ActionLink(b, "Details", new { id = item.EventID })
+                </td>
+            </tr>
+
+    }
+
+</table>
+
+
+
+

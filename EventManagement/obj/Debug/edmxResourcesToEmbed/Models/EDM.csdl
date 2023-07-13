@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BREMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="EVENTTBL">
+    <Key>
+      <PropertyRef Name="EventId" />
+    </Key>
+    <Property Name="EventId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Location" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="StartTime" Type="Time" Nullable="false" Precision="0" />
+    <Property Name="Type" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Duration" Type="Int32" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="OtherDetails" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="InviteByEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Count" Type="Int32" />
+    <Property Name="CommentAdded" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="UserID" Type="Int32" />
+    <NavigationProperty Name="USERTBL" Relationship="Self.FK__EVENTTBL__UserID__3A81B327" FromRole="EVENTTBL" ToRole="USERTBL" />
+  </EntityType>
+  <EntityType Name="USERTBL">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Passcode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="EVENTTBLs" Relationship="Self.FK__EVENTTBL__UserID__3A81B327" FromRole="USERTBL" ToRole="EVENTTBL" />
+  </EntityType>
+  <Association Name="FK__EVENTTBL__UserID__3A81B327">
+    <End Role="USERTBL" Type="Self.USERTBL" Multiplicity="0..1" />
+    <End Role="EVENTTBL" Type="Self.EVENTTBL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USERTBL">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="EVENTTBL">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BREMEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="EVENTTBLs" EntityType="Self.EVENTTBL" />
+    <EntitySet Name="USERTBLs" EntityType="Self.USERTBL" />
+    <AssociationSet Name="FK__EVENTTBL__UserID__3A81B327" Association="Self.FK__EVENTTBL__UserID__3A81B327">
+      <End Role="USERTBL" EntitySet="USERTBLs" />
+      <End Role="EVENTTBL" EntitySet="EVENTTBLs" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="LoginContext-Web.config Connection String" description="LoginContext Connection String used in web.config by the application to access the database." defaultValue="Data Source=eventmanagementdb.csboarf8an0e.ap-south-1.rds.amazonaws.com,1433;Initial Catalog=EventManagementDB;User ID=admin;Password=Parth1289" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\parthsharma\\Desktop\\MyMVCAssignment\\EventManagement\\EventManagement\\obj\\Debug\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='LoginContext']/@connectionString" />
+  </parameter>
+</parameters>
